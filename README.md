@@ -1,34 +1,22 @@
 ## What is this Script?
 
-goorbo is a wrapper script that runs a Grey You half-loop, running daily farming with garbo, performing other helpful daily tasks for you, and also acquiring and perming skills for you automatically. It provides basic profit-tracking, and includes calls to `garbo`, `loopgyou`, `CONSUME`, `gain`, and `UberPvPOptimizer`.
+levelup is a script that levels you up using your available resources, and some purchased from the mall. It focuses on inexpensive things that are available to low-shiny players, so it may purchase things you don't need if you are very shiny. It is based on the post-prism leveling strategy used by goorbo.
 
 ## Installation
 
-For the latest features, and to support the script with much-needed feedback on said features, use the testing branch:
+Run the following in kolmafia's GCLI:
 
 ```text
-git checkout https://github.com/frazazel/goorbo.git testing
+git checkout https://github.com/frazazel/levelup.git release
 ```
-
-For a more stable release, use the release branch:
-
-```text
-git checkout https://github.com/frazazel/goorbo.git release
-```
-
-You will need to `git delete goorbo` before switching branches.
 
 ## How to Use
 
-Run `goorbo`, with optional additional arguments (e.g.`goorbo permtier=2 astralpet="astral belt"`). To see a list of all available run-time settings, run `goorbo help`. To see a list of required / recommended items, skills, and familiars, run `goorbo sim`. To see details about what skills goorbo will target perming for you, run `goorbo simperms`.
+Run `levelup`, with optional additional arguments (e.g.`levelup targetlevel=15`). To see a list of all available run-time settings, run `levelup help`. To see a list of required / recommended items, skills, and familiars, run `levelup sim`. levelup is also configurable via relay script, in the topbar pulldown menu in the relay browser.
 
-## Who is Goorbo For?
+## Who is Levelup For?
 
-It is aimed first and foremost at new players with few shinies, and it aims to complete after-prism leveling to level 13 without requiring any specific expensive or unobtainable item besides the Grey Goose, within 30 adventures, spending approximately 150k on potions, mojo filters and and spleen items with +exp% and +mainstat effects. It does support some IotMs and other expensive and/or hard-to-acquire items, and is expected to support more over time, but support for low-shiny players is the primary goal of goorbo. Shinier players may wish to fork goorbo and modify it for their own use.
-
-## Cautions/Disclaimer
-
-I maintain this script, but as an item farmer, I don't run it myself. I rely on testing and feedback from users to improve goorbo.
+It is aimed first and foremost at new players with few shinies, and it aims to complete leveling to level 13 without requiring any specific expensive or unobtainable item besides the Grey Goose, within 30 adventures, spending approximately 150k on potions, mojo filters and and spleen items with +exp% and +mainstat effects. It does support some IotMs and other expensive and/or hard-to-acquire items, and is expected to support more over time, but support for low-shiny players is the primary goal of levelup. Shinier players may wish to fork levelup and modify it for their own use.
 
 ## Support
 
