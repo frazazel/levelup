@@ -100,6 +100,13 @@ export function LevelingQuest(): Quest {
         do: () => cliExecute(`shower ${myPrimestat()}`),
       },
       {
+        name: "Hatter Buff",
+        ready: () => myBasestat($stat`Moxie`) >= 42,
+        completed: () => get("_madTeaParty"),
+        acquire: $items`oil cap, "DRINK ME" potion`.map((it) => ({ item: it, price: 1000 })),
+        do: () => cliExecute(`hatter ${$item`oil cap`}`),
+      },
+      {
         name: "Game Grid Token",
         completed: () => !have($item`defective Game Grid token`) || get("_defectiveTokenUsed"),
         do: () => use($item`defective Game Grid token`),
