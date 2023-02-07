@@ -1,0 +1,55 @@
+{
+  "name": "levelup",
+  "version": "0.1",
+  "description": "A script that levels you up, optimized for low-shiny accounts. Based on goorbo's leveling code.",
+  "main": "scripts/levelup/levelup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn run build:types && yarn run build:js",
+    "build:types": "tsc",
+    "build:js": "webpack",
+    "lint": "eslint src && prettier --check .",
+    "watch": "webpack --watch --progress"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.14.7",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-libram": "^0.2.27",
+    "prettier": "^2.8.1",
+    "typescript": "^4.4.2",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "dependencies": {
+    "core-js": "^3.16.4",
+    "grimoire-kolmafia": "^0.3.11",
+    "kolmafia": "^5.26994.0",
+    "libram": "^0.7.6",
+    "mafia-shared-relay": "^0.0.7",
+    "typescript-eslint": "^0.0.1-alpha.0"
+  },
+  "author": "frazazel",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frazazel/goorbo.git"
+  },
+  "keywords": [
+    "KoLMafia",
+    "JS",
+    "TS"
+  ],
+  "bugs": {
+    "url": "https://github.com/frazazel/goorbo/issues"
+  },
+  "homepage": "https://github.com/frazazel/goorbo#readme"
+}
