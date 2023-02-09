@@ -513,12 +513,15 @@ export function LevelingQuest(): Quest {
         }),
         prepare: () => {
           restoreHp(0.9 * myHp());
-          if (itemAmount($item`eldritch essence`) > 0)
-            putCloset(itemAmount($item`eldritch essence`), $item`eldritch essence`);
         },
         do: () => {
+          const qty = itemAmount($item`eldritch essence`);
+          if (qty > 0) putCloset(qty, $item`eldritch essence`);
+
           visitUrl("place.php?whichplace=forestvillage&action=fv_scientist");
           runChoice(1);
+
+          if (qty > 0) takeCloset(qty, $item`eldritch essence`);
         },
         combat: new CombatStrategy().macro(() =>
           Macro.externalIf(
