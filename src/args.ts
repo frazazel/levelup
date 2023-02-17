@@ -33,7 +33,7 @@ export const args = Args.create(
       help: `Your VIP Clan. Levelup will whitelist into it at the beginning of your day. Requires clan whitelist.`,
     }),
     targetlevel: Args.number({
-      help: `What level to target via adventuring in Uncle Gator's`,
+      help: `What level to target. Will spend adventures to reach this goal if needed. Use -1 to instead spend all leveling resources that do not take an adventure`,
       default: 13,
     }),
     buffy: Args.boolean({

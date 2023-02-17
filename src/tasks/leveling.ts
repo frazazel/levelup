@@ -52,7 +52,14 @@ import {
 } from "libram";
 import { args } from "../args";
 import { Quest } from "./structure";
-import { bestFam, chewOrWish, nextUnusedBanishItem, noML, stooperDrunk } from "./utils";
+import {
+  bestFam,
+  chewOrWish,
+  freeKillsRemaining,
+  nextUnusedBanishItem,
+  noML,
+  stooperDrunk,
+} from "./utils";
 
 const levelingTurns = 30;
 const finLoc =
@@ -65,7 +72,10 @@ const finLoc =
 export function LevelingQuest(): Quest {
   return {
     name: "Levelup",
-    completed: () => myLevel() >= args.targetlevel || myAdventures() === 0 || stooperDrunk(),
+    completed: () =>
+      (args.targetlevel !== -1 && myLevel() >= args.targetlevel) ||
+      myAdventures() === 0 ||
+      stooperDrunk(),
     tasks: [
       {
         name: "Summon Soap Knife",
@@ -686,7 +696,7 @@ export function LevelingQuest(): Quest {
           !!$effects`HGH-charged, Different Way of Seeing Things, Thou Shant Not Sing`.find((ef) =>
             have(ef)
           ),
-        completed: () => false,
+        completed: () => args.targetlevel === -1 && freeKillsRemaining() === 0,
         effects: [
           ...$effects`Heart of White`,
           ...(finLoc === $location`Uncle Gator's Country Fun-Time Liquid Waste Sluice`

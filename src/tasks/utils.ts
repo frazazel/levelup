@@ -7,6 +7,7 @@ import {
   Item,
   mallPrice,
   Monster,
+  myBasestat,
   myFamiliar,
   myInebriety,
   myLevel,
@@ -21,6 +22,8 @@ import {
   $item,
   $items,
   $phylum,
+  $skill,
+  $stat,
   get,
   getBanishedMonsters,
   have,
@@ -42,6 +45,18 @@ export function noML(): string {
     .filter((it) => have(it))
     .map((it) => `-equip ${it.name}`)
     .join(", ")}`;
+}
+
+export function freeKillsRemaining() {
+  return (
+    (have($item`The Jokester's gun`) && myBasestat($stat`Moxie`) >= 50 && !get("_firedJokestersGun")
+      ? 1
+      : 0) +
+    (have($item`Lil' Doctor™ bag`) ? 3 - get("_chestXRayUsed") : 0) +
+    (have($skill`Gingerbread Mob Hit`) && !get("_gingerbreadMobHitUsed") ? 1 : 0) +
+    (have($skill`Shattering Punch`) ? 3 - get("_shatteringPunchUsed") : 0) +
+    (have($item`replica bat-oomerang`) ? 3 - get("_usedReplicaBatoomerang") : 0)
+  );
 }
 
 export function maxBase(): string {
