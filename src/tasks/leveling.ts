@@ -55,6 +55,12 @@ import { Quest } from "./structure";
 import { bestFam, chewOrWish, nextUnusedBanishItem, noML, stooperDrunk } from "./utils";
 
 const levelingTurns = 30;
+const finLoc =
+  get("stenchAirportAlways") || get("_stenchAirportToday")
+    ? $location`Uncle Gator's Country Fun-Time Liquid Waste Sluice`
+    : get("neverendingPartyAlways") || get("_neverendingPartyToday")
+    ? $location`The Neverending Party`
+    : $location`Hamburglaris Shield Generator`;
 
 export function LevelingQuest(): Quest {
   return {
@@ -675,13 +681,19 @@ export function LevelingQuest(): Quest {
         tracking: "Leveling",
       },
       {
-        name: "Gators",
+        name: "Non-Free Scalers",
         ready: () =>
           !!$effects`HGH-charged, Different Way of Seeing Things, Thou Shant Not Sing`.find((ef) =>
             have(ef)
           ),
         completed: () => false,
-        effects: $effects`Heart of White, Expert Vacationer`,
+        effects: [
+          ...$effects`Heart of White`,
+          ...(finLoc === $location`Uncle Gator's Country Fun-Time Liquid Waste Sluice`
+            ? $effects`Expert Vacationer`
+            : []),
+          ...(finLoc === $location`Hamburglaris Shield Generator` ? $effects`Transpondent` : []),
+        ],
         acquire: () => [
           ...(have($skill`Curse of Weaksauce`)
             ? []
@@ -708,7 +720,7 @@ export function LevelingQuest(): Quest {
           restoreHp(0.75 * myMaxhp());
           restoreMp(8);
         },
-        do: $location`Uncle Gator's Country Fun-Time Liquid Waste Sluice`,
+        do: finLoc,
         post: () => {
           if (!get("_lastCombatWon"))
             throw new Error("Lost Combat - Check to see what went wrong.");
