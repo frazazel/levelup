@@ -1,5 +1,6 @@
 import { CombatStrategy } from "grimoire-kolmafia";
 import {
+  canAdventure,
   chew,
   cliExecute,
   closetAmount,
@@ -328,6 +329,7 @@ export function LevelingQuest(): Quest {
       {
         name: "Drunk Pygmies",
         ready: () =>
+          canAdventure($location`The Hidden Bowling Alley`) &&
           !!$effects`HGH-charged, Different Way of Seeing Things, Thou Shant Not Sing`.find((ef) =>
             have(ef)
           ),
@@ -430,7 +432,7 @@ export function LevelingQuest(): Quest {
           (!have($item`Claw of the Infernal Seal`) && get("_sealsSummoned") >= 5),
         outfit: () => ({
           familiar: $familiar`Grey Goose`,
-          modifier: `club, 0.125 ${myPrimestat()}, ${myPrimestat()} experience, 5 ${myPrimestat()} experience percent, 10 familiar experience`,
+          modifier: `club, ${myPrimestat()} experience, 5 ${myPrimestat()} experience percent, 10 familiar experience`,
         }),
         do: () => visitUrl("inv_use.php?pwd&checked=1&whichitem=3902"),
         combat: new CombatStrategy().macro(() =>

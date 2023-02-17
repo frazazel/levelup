@@ -3,17 +3,11 @@ import {
   cliExecute,
   Effect,
   Familiar,
-  fullnessLimit,
-  getCampground,
-  getWorkshed,
   inebrietyLimit,
   Item,
-  itemAmount,
   mallPrice,
   Monster,
-  myAdventures,
   myFamiliar,
-  myFullness,
   myInebriety,
   myLevel,
   mySpleenUse,
@@ -40,42 +34,6 @@ export function haveAll(its: Item[]): boolean {
 }
 export function haveAny(its: Item[]): boolean {
   return its.reduce((a, it) => a || have(it), false);
-}
-
-type MoonSign =
-  | number
-  | "mongoose"
-  | "wallaby"
-  | "vole"
-  | "platypus"
-  | "opossum"
-  | "marmot"
-  | "wombat"
-  | "blender"
-  | "packrat"
-  | "gnomads"
-  | "knoll"
-  | "canadia";
-export function toMoonSign(str: string | MoonSign): MoonSign {
-  if (
-    typeof str === "string" &&
-    [
-      "mongoose",
-      "wallaby",
-      "vole",
-      "platypus",
-      "opossum",
-      "marmot",
-      "wombat",
-      "blender",
-      "packrat",
-      "gnomads",
-      "knoll",
-      "canadia",
-    ].includes(str)
-  )
-    return str as MoonSign;
-  throw new Error(`${str} is not a valid MoonSign`);
 }
 
 const minusMLItems = $items`nasty rat mask, Drowsy Sword, HOA regulation book, pocketwatch on a chain, security flashlight, Space Trip safety headphones, pine cone necklace, red badge, mushroom badge, water wings for babies, white earbuds, discarded bowtie`;
@@ -137,54 +95,11 @@ export function bestFam(mob?: Monster) {
   return fams.find((fam) => have(fam));
 }
 
-export function canDiet(): boolean {
-  return (
-    myFullness() < fullnessLimit() ||
-    mySpleenUse() < spleenLimit() ||
-    myInebriety() < inebrietyLimit() ||
-    (have($item`distention pill`) && !get("_distentionPillUsed")) ||
-    (have($item`synthetic dog hair pill`) && !get("_syntheticDogHairPillUsed")) ||
-    (have($item`designer sweatpants`) && get("_sweatOutSomeBoozeUsed") < 3 && get("sweat") >= 25) ||
-    (have($item`mime army shotglass`) && !get("_mimeArmyShotglassUsed")) ||
-    (get("currentMojoFilters") < 3 &&
-      mallPrice($item`mojo filter`) + mallPrice($item`transdermal smoke patch`) <
-        2.5 * get("valueOfAdventure"))
-  );
-}
-
 export function stooperDrunk(): boolean {
   return (
     myInebriety() > inebrietyLimit() ||
     (myInebriety() === inebrietyLimit() && myFamiliar() === $familiar`Stooper`)
   );
-}
-
-export function totallyDrunk(): boolean {
-  return have($familiar`Stooper`) && myFamiliar() !== $familiar`Stooper`
-    ? myInebriety() > inebrietyLimit() + 1
-    : myInebriety() > inebrietyLimit();
-}
-
-export function doneAdventuring(): boolean {
-  return (!canDiet() && myAdventures() === 0) || stooperDrunk();
-}
-
-export function backstageItemsDone(): boolean {
-  return (
-    (have($item`giant marshmallow`) ? 1 : 0) +
-      (have($item`beer-scented teddy bear`) ? 1 : 0) +
-      itemAmount($item`gin-soaked blotter paper`) >=
-      2 &&
-    (have($item`booze-soaked cherry`) ? 1 : 0) +
-      (have($item`comfy pillow`) ? 1 : 0) +
-      itemAmount($item`sponge cake`) >=
-      2
-  );
-}
-
-const gardens = $items`packet of pumpkin seeds, Peppermint Pip Packet, packet of dragon's teeth, packet of beer seeds, packet of winter seeds, packet of thanksgarden seeds, packet of tall grass seeds, packet of mushroom spores`;
-export function getGarden(): Item {
-  return gardens.find((it) => it.name in getCampground()) || $item`none`;
 }
 
 let banishes: Item[];
@@ -204,17 +119,4 @@ export function chewOrWish(it: Item, ef: Effect): void {
     retrieveItem($item`pocket wish`);
     cliExecute(`genie effect ${ef.name}`);
   }
-}
-
-export function expectCMC() {
-  return (
-    getWorkshed() !== $item`cold medicine cabinet` &&
-    have($item`cold medicine cabinet`) &&
-    !get("_workshedItemUsed")
-  );
-}
-
-export function isGoodGarboScript(scr: string): boolean {
-  // Returns true if scr includes "garbo", and doesn't include a semicolon
-  return scr.includes("garbo") && !scr.includes(";");
 }
