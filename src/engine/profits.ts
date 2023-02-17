@@ -7,12 +7,14 @@ import {
   historicalPrice,
   Item,
   myAscensions,
+  myLevel,
   myTurncount,
   print,
   sellPrice,
   toInt,
 } from "kolmafia";
 import { $item, $items, get, getSaleValue, Session, set, sumNumbers } from "libram";
+import { args } from "../args";
 
 function currency(...items: Item[]): () => number {
   const unitCost: [Item, number][] = items.map((i) => {
@@ -316,7 +318,11 @@ function printProfitSegment(key: string, record: ProfitRecord, color: string) {
 
 export function printProfits(records: Records): void {
   print("");
-  print("== Levelup Summary ==");
+  print(
+    `== Levelup Results: reached level ${myLevel()}${
+      args.targetlevel === -1 ? "" : ` / ${args.targetlevel}`
+    } ==`
+  );
   printProfitSegment("Leveling", records["Leveling"], "green");
   printProfitSegment("Other", records["Other"], "green");
   printProfitSegment(

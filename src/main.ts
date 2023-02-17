@@ -1,6 +1,6 @@
 import { print } from "kolmafia";
 import { Args, getTasks } from "grimoire-kolmafia";
-import { LevelingQuest } from "./tasks/leveling";
+import { LevelingAlerts, LevelingQuest } from "./tasks/leveling";
 import { ProfitTrackingEngine } from "./engine/engine";
 import { checkReqs } from "./tasks/sim";
 import { args } from "./args";
@@ -24,7 +24,7 @@ export function main(command?: string): void {
 
   print(`Running: levelup v${version}`);
 
-  const tasks = getTasks([LevelingQuest()]);
+  const tasks = getTasks([LevelingAlerts(), LevelingQuest()]);
 
   // Abort during the prepare() step of the specified task
   if (args.abort) {

@@ -767,12 +767,30 @@ export function LevelingQuest(): Quest {
         limit: { tries: levelingTurns + 3 }, //+3 for unaccounted for wanderers, etc.
         tracking: "Leveling",
       },
+    ],
+  };
+}
+
+export function LevelingAlerts(): Quest {
+  return {
+    name: "Alert",
+    completed: () => false,
+    tasks: [
       {
-        name: "Alert-Leveling Failed",
-        completed: () => myLevel() >= args.targetlevel,
-        do: (): void => {
+        name: "Overdrunk",
+        ready: () => stooperDrunk(),
+        completed: () => false,
+        do: () => {
+          throw new Error(`You are too drunk to continue.`);
+        },
+      },
+      {
+        name: "Leveling Failed",
+        ready: () => myAdventures() === 0 && myLevel() < args.targetlevel,
+        completed: () => false,
+        do: () => {
           throw new Error(
-            `Finished Leveling Tasks, but only reached level ${myLevel()}/${args.targetlevel}`
+            `Finished Leveling Tasks, but only reached level ${myLevel()} / ${args.targetlevel}`
           );
         },
       },
