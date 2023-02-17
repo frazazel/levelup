@@ -704,16 +704,16 @@ export function LevelingQuest(): Quest {
         ],
         outfit: () => ({
           familiar: $familiar`Grey Goose`,
-          ...(have($item`The Jokester's gun`) &&
-          myBasestat($stat`Moxie`) >= 50 &&
-          !get("_firedJokestersGun")
-            ? { weapon: $item`The Jokester's gun` }
-            : have($item`Lil' Doctor™ bag`) && get("_chestXRayUsed") < 3
-            ? { equip: [$item`Lil' Doctor™ bag`] }
-            : {}),
-          ...(have($item`makeshift garbage shirt`)
-            ? { shirt: $item`makeshift garbage shirt` }
-            : {}),
+          equip: [
+            ...(have($item`The Jokester's gun`) &&
+            myBasestat($stat`Moxie`) >= 50 &&
+            !get("_firedJokestersGun")
+              ? $items`The Jokester's gun`
+              : have($item`Lil' Doctor™ bag`) && get("_chestXRayUsed") < 3
+              ? $items`Lil' Doctor™ bag`
+              : []),
+            ...(have($item`makeshift garbage shirt`) ? $items`makeshift garbage shirt` : []),
+          ],
           modifier: `effective, 0.125 ${myPrimestat()}, ${myPrimestat()} experience, 5 ${myPrimestat()} experience percent, 10 familiar experience, ${noML()}`,
         }),
         prepare: (): void => {
@@ -750,6 +750,7 @@ export function LevelingQuest(): Quest {
             .trySkill($skill`Chest X-Ray`)
             .trySkill($skill`Gingerbread Mob Hit`)
             .trySkill($skill`Shattering Punch`)
+            .tryItem($item`replica bat-oomerang`)
             .attack()
             .repeat()
         ),
