@@ -8470,9 +8470,9 @@ function LevelingQuest() {
       }
     }, {
       name: "Buff Mainstat",
-      completed: () => (0,external_kolmafia_namespaceObject.myBuffedstat)((0,external_kolmafia_namespaceObject.myPrimestat)()) >= 11 * (0,external_kolmafia_namespaceObject.myBasestat)((0,external_kolmafia_namespaceObject.myPrimestat)()),
+      completed: () => (0,external_kolmafia_namespaceObject.myBuffedstat)((0,external_kolmafia_namespaceObject.myPrimestat)()) >= 10.75 * (0,external_kolmafia_namespaceObject.myBasestat)((0,external_kolmafia_namespaceObject.myPrimestat)()),
       effects: $effects(_templateObject150 || (_templateObject150 = leveling_taggedTemplateLiteral(["Trivia Master"]))),
-      do: () => (0,external_kolmafia_namespaceObject.cliExecute)("gain ".concat(11 * (0,external_kolmafia_namespaceObject.myBasestat)((0,external_kolmafia_namespaceObject.myPrimestat)()), " ").concat((0,external_kolmafia_namespaceObject.myPrimestat)())),
+      do: () => (0,external_kolmafia_namespaceObject.cliExecute)("gain ".concat(11 * (0,external_kolmafia_namespaceObject.myBasestat)((0,external_kolmafia_namespaceObject.myPrimestat)()) + 1, " ").concat((0,external_kolmafia_namespaceObject.myPrimestat)())),
       limit: {
         tries: levelingTurns
       },
@@ -9072,7 +9072,7 @@ function main_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) 
 
 
 
-var version = "0.1.3";
+var version = "0.1.4";
 function main(command) {
   Args.fill(args, command);
   if (args.help) {
