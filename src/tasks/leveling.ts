@@ -510,9 +510,9 @@ export function LevelingQuest(): Quest {
       },
       {
         name: "Buff Mainstat",
-        completed: () => myBuffedstat(myPrimestat()) >= 11 * myBasestat(myPrimestat()),
+        completed: () => myBuffedstat(myPrimestat()) >= 10.75 * myBasestat(myPrimestat()),
         effects: $effects`Trivia Master`,
-        do: () => cliExecute(`gain ${11 * myBasestat(myPrimestat())} ${myPrimestat()}`),
+        do: () => cliExecute(`gain ${11 * myBasestat(myPrimestat()) + 1} ${myPrimestat()}`),
         limit: { tries: levelingTurns },
         tracking: "Leveling",
       },
