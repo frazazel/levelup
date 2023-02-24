@@ -1,6 +1,6 @@
 {
   "name": "levelup",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A script that levels you up, optimized for low-shiny accounts. Based on goorbo's leveling code.",
   "main": "scripts/levelup/levelup.js",
   "scripts": {
