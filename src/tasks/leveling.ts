@@ -6,7 +6,6 @@ import {
   closetAmount,
   getCampground,
   getClanName,
-  getDwelling,
   handlingChoice,
   haveEffect,
   isBanished,
@@ -214,12 +213,12 @@ export function LevelingQuest(): Quest {
       },
       {
         name: "Strange Leaflet",
-        completed: () => get("leafletCompleted"),
+        completed: () => get("leafletCompleted") || !have($item`strange leaflet`),
         do: () => cliExecute("leaflet"),
       },
       {
         name: "Frobozz",
-        completed: () => getDwelling() === $item`Frobozz Real-Estate Company Instant House (TM)`,
+        completed: () => !have($item`Frobozz Real-Estate Company Instant House (TM)`),
         do: () => use($item`Frobozz Real-Estate Company Instant House (TM)`),
       },
       {
