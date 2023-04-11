@@ -759,7 +759,10 @@ export function LevelingQuest(): Quest {
             .trySkill($skill`Chest X-Ray`)
             .trySkill($skill`Gingerbread Mob Hit`)
             .trySkill($skill`Shattering Punch`)
-            .tryItem($item`replica bat-oomerang`)
+            .externalIf(
+              get("_usedReplicaBatoomerang") < 3,
+              Macro.tryItem($item`replica bat-oomerang`)
+            )
             .attack()
             .repeat()
         ),
