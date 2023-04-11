@@ -5,7 +5,7 @@ import { ProfitTrackingEngine } from "./engine/engine";
 import { checkReqs } from "./tasks/sim";
 import { args } from "./args";
 
-const version = "0.1.5";
+const version = "0.1.6";
 
 export function main(command?: string): void {
   Args.fill(args, command);
